@@ -10,10 +10,15 @@ function QuestionList({questions, setQuestions}) {
       .catch(error => console.log(`Error fetching questions: ${error}`))
   },[])
 
+  function handleDeleteQuestion(questionToBeDeleted){
+    const remainingQuestions = questions.filter(question => question.id !== questionToBeDeleted.id)
+    setQuestions(remainingQuestions)
+  }
+
   return (
     <section>
       <h1>Quiz Questions</h1>
-      <ul>{questions.map(question => <QuestionItem key={question.id} question={question}/>
+      <ul>{questions.map(question => <QuestionItem key={question.id} question={question} handleDeleteQuestion={handleDeleteQuestion}/>
       )}</ul>
     </section>
   );
